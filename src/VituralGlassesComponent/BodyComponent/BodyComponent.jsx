@@ -76,31 +76,33 @@ const dataGlasses = [
 export default class BodyComponent extends Component {
 
     state = {
+        glass:{}
     };
 
     renderGlass = () => {
         return (
             <>
-                <img className='render-img' src={this.state.url} alt="" />
+                <img className='render-img' src={this.state.glass.url} alt="" />
                 <div className='render-bg'>
-                    <h3 className='render-name'>{this.state.name}</h3>
-                    <p className='render-price'>{this.state.price}</p>
-                    <p className='render-desc'>{this.state.desc}</p>
+                    <h3 className='render-name'>{this.state.glass.name}</h3>
+                    <p className='render-price'>{this.state.glass.price}</p>
+                    <p className='render-desc'>{this.state.glass.desc}</p>
                 </div>
             </>
         )
     }
 
-    changeGlass = (id) => {
-        const dataGlass = dataGlasses.find(item => item.id === id);
-        this.setState(dataGlass);
+    changeGlass = (glassItem) => {
+        this.setState({
+            glass: glassItem
+        })
     }
 
     showGlassList = () => {
-        return dataGlasses.map(glass => {
-            const { id, src } = glass;
+        return dataGlasses.map(glassItem => {
+            const { id, src } = glassItem;
             return <div className='d-flex' key={id}>
-                <img onClick={() => { this.changeGlass(id) }} className='px-3' style={{ width: "150px", height: "100px" }} src={src} alt="" />
+                <img onClick={() => { this.changeGlass(glassItem) }} className='px-3' style={{ width: "150px", height: "100px" }} src={src} alt="" />
             </div>
         })
     }
@@ -118,7 +120,7 @@ export default class BodyComponent extends Component {
                         <div className="col-5 d-flex justify-content-around">
                             <div className='body-img-right'>
                                 <img style={{ width: "300px", height: "400px" }} src="./glassesImage/model.jpg" alt="" />
-                                {this.state.id && this.renderGlass()}
+                                {this.state.glass.id && this.renderGlass()}
                             </div>
                         </div>
                     </div>
